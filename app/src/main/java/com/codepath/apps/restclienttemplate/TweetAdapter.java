@@ -1,7 +1,6 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +21,10 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         mTweets = tweets;
     }
 
+
     // for each row, inflate layout and pass to ViewHolder
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context =  parent.getContext();
         LayoutInflater inflator = LayoutInflater.from(context);
 
@@ -32,6 +32,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         ViewHolder viewHolder = new ViewHolder(tweetView);
         return viewHolder;
     }
+
 
 
     // bind values based on position of element
@@ -67,5 +68,4 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
         }
     }
-
 }

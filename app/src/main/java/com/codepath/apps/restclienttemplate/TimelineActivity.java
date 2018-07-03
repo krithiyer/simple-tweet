@@ -1,10 +1,13 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -59,9 +62,8 @@ public class TimelineActivity extends AppCompatActivity {
                     // convert each object into a Tweet model
                     // add that Tweet model to our data source
                     // notify the adapter
-                    Tweet tweet = null;
                     try {
-                        tweet = Tweet.fromJSON(response.getJSONObject(i));
+                        Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
                         tweets.add(tweet);
                         tweetAdapter.notifyItemInserted(tweets.size() - 1);
                     } catch (JSONException e) {
@@ -90,5 +92,21 @@ public class TimelineActivity extends AppCompatActivity {
                 throwable.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // inflate the menu
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem menu1 = menu.findItem(R.id.miCompose);
+        menu1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
+                startActivity(i);
+                return false;
+            }
+        });
+        return true;
     }
 }

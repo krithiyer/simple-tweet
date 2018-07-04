@@ -15,6 +15,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ public class TimelineActivity extends AppCompatActivity {
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
+    Tweet newTweet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,10 +105,22 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
-                startActivity(i);
+                startActivityForResult(i, 20);
                 return false;
             }
         });
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // REQUEST_CODE is defined above
+        if (resultCode == 2 && requestCode == 20) {
+            // Extract name value from result extras
+            newTweet = Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
+            tweets.add(0, newTweet);
+            tweetAdapter.notifyItemInserted(0);
+            rvTweets.scrollToPosition(0);
+        }
     }
 }

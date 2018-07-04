@@ -38,7 +38,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:text="Time"
-        android:textAppearance="@android:style/TextAppearance.Small"
-        android:textStyle="italic" />
+        android:text="Time" />
 </RelativeLayout>

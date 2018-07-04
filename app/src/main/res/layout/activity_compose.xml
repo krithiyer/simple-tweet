@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/tvNewTweet"
+        android:onClick="onSubmit"
         android:text="Button" />
 
 </RelativeLayout>

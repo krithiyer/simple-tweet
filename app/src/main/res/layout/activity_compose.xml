@@ -12,8 +12,8 @@
         android:layout_height="65dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvUsername"
-        android:hint="What's happening?"
-        android:text="TextView" />
+        android:text="What's Happening?"
+        android:textColor="#4daab8c2" />
 
     <Button
         android:id="@+id/tvTweetButton"

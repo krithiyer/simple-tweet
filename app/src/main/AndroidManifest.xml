@@ -10,16 +10,16 @@
     <application
         android:name=".TwitterApp"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ic_launcher_twitter"
         android:label="Home"
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
+            android:icon="@drawable/ic_launcher_twitter"
             android:label="Log-In"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>

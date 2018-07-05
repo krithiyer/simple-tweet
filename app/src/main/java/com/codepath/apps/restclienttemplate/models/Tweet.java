@@ -13,6 +13,8 @@ public class Tweet {
     public User user;
     public String createdAt;
 
+    public Tweet(){}
+
     public User getUser() {
         return user;
     }

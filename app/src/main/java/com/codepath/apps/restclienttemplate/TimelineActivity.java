@@ -2,12 +2,15 @@ package com.codepath.apps.restclienttemplate;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -28,27 +31,32 @@ public class TimelineActivity extends AppCompatActivity {
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
     Tweet newTweet;
+    private final int REQUEST_CODE  = 20;
+    MenuItem miActionProgressItem;
+    private SwipeRefreshLayout swipeContainer;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timeline);
-        client = TwitterApp.getRestClient(this);
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_timeline);
+            client = TwitterApp.getRestClient(this);
 
-        // find RecyclerView
-        rvTweets = (RecyclerView) findViewById(R.id.rvTweet);
-        // initialize the data source
-        tweets = new ArrayList<>();
-        // construct the adaptor from this data source
-        tweetAdapter = new TweetAdapter(tweets);
-        // RecyclerView setup
-        rvTweets.setLayoutManager(new LinearLayoutManager(this));
-        // set the adapter
-        rvTweets.setAdapter(tweetAdapter);
-        populateTimeline();
-    }
+            // find RecyclerView
+            rvTweets = (RecyclerView) findViewById(R.id.rvTweet);
+            // initialize the data source
+            tweets = new ArrayList<>();
+            // construct the adaptor from this data source
+            tweetAdapter = new TweetAdapter(tweets);
+            // RecyclerView setup
+            rvTweets.setLayoutManager(new LinearLayoutManager(this));
+            // set the adapter
+            rvTweets.setAdapter(tweetAdapter);
+            populateTimeline();
+        }
 
-    private void populateTimeline() {
+
+        private void populateTimeline() {
         client.getHomeTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -105,7 +113,7 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
-                startActivityForResult(i, 20);
+                startActivityForResult(i, REQUEST_CODE);
                 return false;
             }
         });
@@ -122,5 +130,24 @@ public class TimelineActivity extends AppCompatActivity {
             tweetAdapter.notifyItemInserted(0);
             rvTweets.scrollToPosition(0);
         }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Store instance of the menu item containing progress
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+        // Extract the action-view from the menu item
+        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
+        // Return to finish
+        return super.onPrepareOptionsMenu(menu);
+    }
+    public void showProgressBar() {
+        // Show progress item
+        miActionProgressItem.setVisible(true);
+    }
+
+    public void hideProgressBar() {
+        // Hide progress item
+        miActionProgressItem.setVisible(false);
     }
 }

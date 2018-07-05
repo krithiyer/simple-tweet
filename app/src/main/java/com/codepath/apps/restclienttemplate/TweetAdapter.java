@@ -25,13 +25,22 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         mTweets = tweets;
     }
 
+    public void clear() {
+        mTweets.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Tweet> list) {
+        mTweets.addAll(list);
+        notifyDataSetChanged();
+    }
+
 
     // for each row, inflate layout and pass to ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context =  parent.getContext();
         LayoutInflater inflator = LayoutInflater.from(context);
-
         View tweetView = inflator.inflate(R.layout.item_tweet, parent,false);
         ViewHolder viewHolder = new ViewHolder(tweetView);
         return viewHolder;

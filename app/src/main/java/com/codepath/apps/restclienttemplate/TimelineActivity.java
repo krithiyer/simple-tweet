@@ -29,7 +29,7 @@ public class TimelineActivity extends AppCompatActivity {
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
     Tweet newTweet;
-    private final int REQUEST_CODE  = 20;
+    //private final int REQUEST_CODE  = 20;
     private SwipeRefreshLayout swipeContainer;
 
 
@@ -124,7 +124,7 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
-                startActivityForResult(i, REQUEST_CODE);
+                startActivity(i);
                 return false;
             }
         });
@@ -132,9 +132,8 @@ public class TimelineActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // REQUEST_CODE is defined above
-        if (resultCode == 2 && requestCode == 20) {
+    public void onActivityReenter(int resultCode, Intent data) {
+        if (resultCode == 2) {
             // Extract name value from result extras
             newTweet = Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
             tweets.add(0, newTweet);
@@ -142,6 +141,4 @@ public class TimelineActivity extends AppCompatActivity {
             rvTweets.scrollToPosition(0);
         }
     }
-
-
 }

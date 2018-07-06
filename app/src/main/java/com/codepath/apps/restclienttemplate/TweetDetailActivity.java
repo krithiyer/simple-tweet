@@ -1,18 +1,27 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.parceler.Parcels;
+
+import cz.msebera.android.httpclient.Header;
 
 public class TweetDetailActivity extends AppCompatActivity {
 
+    private final int RESULT_CODE  = 2;
     // declaring views
     public ImageButton ibDetailFavorite;
     public TextView tvDetailFavorites;
@@ -47,25 +56,35 @@ public class TweetDetailActivity extends AppCompatActivity {
 
         Glide.with(this).load(detailTweet.user.profileImageURL).into(ivDetailProfile);
 
-        //ibDetailRetweets.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-            //public void onClick(View v) {
+        ibDetailRetweets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 // creating message
-              //  TextView rtBody = (TextView) findViewById(R.id.tvDetailBody);
-                //TextView rtUsername = (TextView) findViewById(R.id.tvDetailUsername);
-           //     String finalMessage = rtUsername.toString() + ": " + rtBody.toString();
-            //    long userID = detailTweet.uid;
+                TextView rtBody = (TextView) findViewById(R.id.tvDetailBody);
+                TextView rtUsername = (TextView) findViewById(R.id.tvDetailUsername);
+                String finalMessage = rtUsername.toString() + ": " + rtBody.toString();
+                long userID = detailTweet.uid;
 
-              //  TwitterClient client = TwitterApp.getRestClient(getApplicationContext());
-               // client.reTweet(userID, finalMessage, new JsonHttpResponseHandler() {
-                ///    @Override
-                  //  public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    //    Context context = getApplicationContext();
-                      //  rtTweet = Tweet.fromJSON(response);
-                  //  }
- //               });
-//
-   //         }
-  //      });
+                TwitterClient client = TwitterApp.getRestClient(getApplicationContext());
+                client.reTweet(userID, finalMessage, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            Context context = getApplicationContext();
+                            rtTweet = Tweet.fromJSON(response);
+                            Intent retweet = new Intent(context, TimelineActivity.class);
+                            retweet.putExtra("tweet", Parcels.wrap(rtTweet));
+                            setResult(RESULT_CODE, retweet);
+                            context.startActivity(retweet);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+            }
+        });
     }
 }

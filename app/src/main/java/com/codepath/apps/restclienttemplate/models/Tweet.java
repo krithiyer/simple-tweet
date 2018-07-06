@@ -34,7 +34,7 @@ public class Tweet {
         tweet.uid = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.retweets = jsonObject.getInt("retweet_count");
-        if (jsonObject.getJSONObject("retweeted_status") == null) {
+        if (jsonObject.optJSONObject("retweeted_status") == null) {
             tweet.favorites = jsonObject.getInt("favorite_count");
         } else {
             JSONObject retweetFavCount = jsonObject.getJSONObject("retweeted_status");

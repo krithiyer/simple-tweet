@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -26,9 +25,7 @@ public class ComposeActivity extends AppCompatActivity {
     ImageButton reply;
     EditText currReply;
     Tweet passTweet;
-    private EditText tvNewTweet;
-    private TextView tvCharCount;
-    int charCount;
+    Tweet rtTweetUnwrap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +35,9 @@ public class ComposeActivity extends AppCompatActivity {
         currReply = (EditText) findViewById(R.id.tvNewTweet);
         reply = (ImageButton) findViewById(R.id.ibReply);
         String replyUserName = getIntent().getStringExtra("tweet");
-        currReply.append("@" + replyUserName);
-
-
-
+        if (replyUserName != null) {
+            currReply.setText("@" + replyUserName);
+        }
 
         pressButton.setOnClickListener(new View.OnClickListener() {
             @Override

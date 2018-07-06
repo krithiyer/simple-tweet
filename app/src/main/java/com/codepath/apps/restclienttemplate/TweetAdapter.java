@@ -104,15 +104,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                 }
             });
 
-            ibFavorites.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Tweet updateFav = mTweets.get(getAdapterPosition());
-                    updateFav.favorites = updateFav.getFavorites() + 1;
-                    tvFavorites.setText(Integer.toString(updateFav.getFavorites()));
-
-                }
-            });
 
             replyTweet.setOnClickListener(new View.OnClickListener() {
                 @Override

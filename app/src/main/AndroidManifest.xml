@@ -20,6 +20,7 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
@@ -34,7 +35,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".TimelineActivity" />
-        <activity android:name=".ComposeActivity"></activity>
+        <activity android:name=".ComposeActivity" />
+        <activity android:name=".TweetDetailActivity"></activity>
     </application>
 
 </manifest>

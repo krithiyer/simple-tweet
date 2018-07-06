@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -32,11 +31,10 @@ public class TimelineActivity extends AppCompatActivity {
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
     Tweet newTweet;
-    ImageButton reply;
     private final int REQUEST_CODE  = 20;
     MenuItem miActionProgressItem;
     private SwipeRefreshLayout swipeContainer;
-    ImageButton replyTweet;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,6 +154,7 @@ public class TimelineActivity extends AppCompatActivity {
         // Return to finish
         return super.onPrepareOptionsMenu(menu);
     }
+
     public void showProgressBar() {
         // Show progress item
         miActionProgressItem.setVisible(true);

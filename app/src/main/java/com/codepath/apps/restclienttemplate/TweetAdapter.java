@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
+import org.parceler.Parcels;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -29,11 +31,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
     public void clear() {
         mTweets.clear();
-        notifyDataSetChanged();
-    }
-
-    public void addAll(List<Tweet> list) {
-        mTweets.addAll(list);
         notifyDataSetChanged();
     }
 
@@ -80,9 +77,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvBody;
         public TextView tvCreatedAt;
         public ImageButton replyTweet;
-        //public TextView tvReplies;
         public TextView tvFavorites;
         public TextView tvRetweets;
+        public ImageButton ibFavorites;
 
 
         public ViewHolder(View itemView) {
@@ -92,10 +89,30 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvCreatedAt = (TextView) itemView.findViewById(R.id.tvCreatedAt);
-            //tvReplies = (TextView) itemView.findViewById(R.id.tvReplies);
             tvFavorites = (TextView) itemView.findViewById(R.id.tvFavorites);
             tvRetweets = (TextView) itemView.findViewById(R.id.tvRetweets);
             replyTweet = (ImageButton) itemView.findViewById(R.id.ibReply);
+            ibFavorites = (ImageButton) itemView.findViewById(R.id.ibFavorite);
+
+            tvBody.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent tweetBody = new Intent(context, TweetDetailActivity.class);
+                    Tweet currTweet = mTweets.get(getAdapterPosition());
+                    tweetBody.putExtra("tweet", Parcels.wrap(currTweet));
+                    context.startActivity(tweetBody);
+                }
+            });
+
+            ibFavorites.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Tweet updateFav = mTweets.get(getAdapterPosition());
+                    updateFav.favorites = updateFav.getFavorites() + 1;
+                    tvFavorites.setText(Integer.toString(updateFav.getFavorites()));
+
+                }
+            });
 
             replyTweet.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -6,7 +6,7 @@
     android:layout_width="match_parent" android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/ivProfileImage"
+        android:id="@+id/ivDetailProfile"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
@@ -14,41 +14,33 @@
         app:srcCompat="@android:color/black" />
 
     <TextView
-        android:id="@+id/tvUserName"
+        android:id="@+id/tvDetailUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dp"
-        android:layout_toEndOf="@+id/ivProfileImage"
+        android:layout_toEndOf="@+id/ivDetailProfile"
         android:text="TextView"
         android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/tvBody"
+        android:id="@+id/tvDetailBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvUserName"
+        android:layout_below="@+id/tvDetailUsername"
         android:layout_marginLeft="5dp"
-        android:layout_toEndOf="@+id/ivProfileImage"
+        android:layout_toEndOf="@+id/ivDetailProfile"
         android:autoLink="all"
         android:layout_marginBottom="5dp"
         android:text="TextView" />
 
-    <TextView
-        android:id="@+id/tvCreatedAt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:text="Time" />
-
 
     <ImageButton
-        android:id="@+id/ibReply"
+        android:id="@+id/ibDetailReply"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignStart="@+id/tvUserName"
-        android:layout_below="@+id/tvBody"
+        android:layout_alignStart="@+id/tvDetailUsername"
+        android:layout_below="@+id/tvDetailBody"
         android:layout_marginTop="-5dp"
         android:adjustViewBounds="true"
         android:tint="#ff1da1f2"
@@ -56,51 +48,51 @@
         app:srcCompat="@drawable/vector_compose_dm_fab" />
 
     <ImageButton
-        android:id="@+id/ibRetweet"
+        android:id="@+id/ibDetailRetweet"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/tvBody"
+        android:layout_below="@+id/tvDetailBody"
         android:layout_marginTop="-5dp"
-        android:layout_toEndOf="@+id/tvReplies"
+        android:layout_toEndOf="@+id/tvDetailReplies"
         android:adjustViewBounds="true"
         android:backgroundTint="#ffffff"
         android:tint="#ff1da1f2"
         app:srcCompat="@drawable/ic_vector_retweet_stroke" />
 
     <ImageButton
-        android:id="@+id/ibFavorite"
+        android:id="@+id/ibDetailFavorite"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/tvBody"
+        android:layout_below="@+id/tvDetailBody"
         android:layout_marginTop="-5dp"
-        android:layout_toEndOf="@+id/tvRetweets"
+        android:layout_toEndOf="@+id/tvDetailRetweets"
         android:adjustViewBounds="true"
         android:backgroundTint="#ffffff"
         android:tint="#ff1da1f2"
         app:srcCompat="@drawable/ic_vector_heart_stroke" />
 
     <TextView
-        android:id="@+id/tvReplies"
+        android:id="@+id/tvDetailReplies"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginRight="5dp"
-        android:layout_below="@+id/tvBody"
-        android:layout_toEndOf="@+id/ibReply" />
+        android:layout_below="@+id/tvDetailBody"
+        android:layout_toEndOf="@+id/ibDetailReply" />
 
     <TextView
-        android:id="@+id/tvRetweets"
+        android:id="@+id/tvDetailRetweets"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_toEndOf="@+id/ibRetweet"
+        android:layout_toEndOf="@+id/ibDetailRetweet"
         android:layout_marginRight="5dp"
-        android:layout_below="@+id/tvBody"
+        android:layout_below="@+id/tvDetailBody"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/tvFavorites"
+        android:id="@+id/tvDetailFavorites"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_below="@+id/tvBody"
-        android:layout_toEndOf="@+id/ibFavorite"
+        android:layout_below="@+id/tvDetailBody"
+        android:layout_toEndOf="@+id/ibDetailFavorite"
         android:text="TextView" />
 </RelativeLayout>

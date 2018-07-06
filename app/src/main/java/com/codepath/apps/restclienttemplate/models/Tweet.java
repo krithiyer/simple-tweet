@@ -22,6 +22,10 @@ public class Tweet {
         return user;
     }
 
+    public int getFavorites() {
+        return favorites;
+    }
+
     // deserialize the JSON
     public static Tweet fromJSON(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();

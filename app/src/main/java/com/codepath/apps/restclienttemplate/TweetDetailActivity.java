@@ -23,6 +23,7 @@ public class TweetDetailActivity extends AppCompatActivity {
     public TextView tvDetailBody;
     // tweet to hold unwrapped tweet
     public Tweet detailTweet;
+    Tweet rtTweet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,28 @@ public class TweetDetailActivity extends AppCompatActivity {
         tvDetailBody.setText(detailTweet.body);
         tvDetailRetweets.setText(Integer.toString(detailTweet.retweets));
         tvDetailFavorites.setText(Integer.toString(detailTweet.getFavorites()));
+
         Glide.with(this).load(detailTweet.user.profileImageURL).into(ivDetailProfile);
+
+        //ibDetailRetweets.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+            //public void onClick(View v) {
+                // creating message
+              //  TextView rtBody = (TextView) findViewById(R.id.tvDetailBody);
+                //TextView rtUsername = (TextView) findViewById(R.id.tvDetailUsername);
+           //     String finalMessage = rtUsername.toString() + ": " + rtBody.toString();
+            //    long userID = detailTweet.uid;
+
+              //  TwitterClient client = TwitterApp.getRestClient(getApplicationContext());
+               // client.reTweet(userID, finalMessage, new JsonHttpResponseHandler() {
+                ///    @Override
+                  //  public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    //    Context context = getApplicationContext();
+                      //  rtTweet = Tweet.fromJSON(response);
+                  //  }
+ //               });
+//
+   //         }
+  //      });
     }
 }

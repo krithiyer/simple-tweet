@@ -8,6 +8,9 @@
         <item name="colorPrimary">#ff1da1f2</item>
         <item name="colorPrimaryDark">#000000</item>
         <item name="android:icon">@drawable/ic_launcher_twitter</item>
+        <item name="colorControlNormal">#ffffff</item>
+        <item name="colorControlActivated">#ffffff</item>
+        <item name="colorControlHighlight">#ffffff</item>
 
     </style>
 

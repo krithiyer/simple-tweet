@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -31,32 +32,46 @@ public class TimelineActivity extends AppCompatActivity {
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
     Tweet newTweet;
+    ImageButton reply;
     private final int REQUEST_CODE  = 20;
     MenuItem miActionProgressItem;
     private SwipeRefreshLayout swipeContainer;
-
+    ImageButton replyTweet;
 
     @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_timeline);
-            client = TwitterApp.getRestClient(this);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_timeline);
+        swipeContainer = findViewById(R.id.swipeContainer);
 
-            // find RecyclerView
-            rvTweets = (RecyclerView) findViewById(R.id.rvTweet);
-            // initialize the data source
-            tweets = new ArrayList<>();
-            // construct the adaptor from this data source
-            tweetAdapter = new TweetAdapter(tweets);
-            // RecyclerView setup
-            rvTweets.setLayoutManager(new LinearLayoutManager(this));
-            // set the adapter
-            rvTweets.setAdapter(tweetAdapter);
-            populateTimeline();
-        }
+        client = TwitterApp.getRestClient(this);
+        // Only ever call `setContentView` once right at the top
+        // find RecyclerView
+        rvTweets = (RecyclerView) findViewById(R.id.rvTweet);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                populateTimeline();
 
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        tweets = new ArrayList<>();
+        // construct the adaptor from this data source
+        tweetAdapter = new TweetAdapter(tweets);
+        // RecyclerView setup
+        rvTweets.setLayoutManager(new LinearLayoutManager(this));
+        // set the adapter
+        rvTweets.setAdapter(tweetAdapter);
+        populateTimeline();
+    }
 
-        private void populateTimeline() {
+    private void populateTimeline() {
         client.getHomeTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -65,7 +80,7 @@ public class TimelineActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                //Log.d("Twitter Client", response.toString());
+                tweetAdapter.clear();
                 // iterate through the JSONArray
                 // for each entry, deserialize the JSON object
                 for (int i = 0; i < response.length(); i++) {
@@ -81,7 +96,7 @@ public class TimelineActivity extends AppCompatActivity {
                     }
 
                 }
-
+                swipeContainer.setRefreshing(false);
             }
 
             @Override

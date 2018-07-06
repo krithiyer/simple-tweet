@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="5dp"
+    android:layout_margin="10dp"
     android:layout_width="match_parent" android:layout_height="wrap_content">
 
     <ImageView
@@ -30,6 +30,7 @@
         android:layout_below="@+id/tvUserName"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
+        android:layout_marginBottom="5dp"
         android:text="TextView" />
 
     <TextView
@@ -39,4 +40,66 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:text="Time" />
+
+
+    <ImageButton
+        android:id="@+id/ibReply"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/tvUserName"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginTop="-5dp"
+        android:adjustViewBounds="true"
+        android:tint="#ff1da1f2"
+        android:backgroundTint="#ffffff"
+        app:srcCompat="@drawable/vector_compose_dm_fab" />
+
+    <ImageButton
+        android:id="@+id/ibRetweet"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginTop="-5dp"
+        android:layout_toEndOf="@+id/tvReplies"
+        android:adjustViewBounds="true"
+        android:backgroundTint="#ffffff"
+        android:tint="#ff1da1f2"
+        app:srcCompat="@drawable/ic_vector_retweet_stroke" />
+
+    <ImageButton
+        android:id="@+id/ibFavorite"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginTop="-5dp"
+        android:layout_toEndOf="@+id/tvRetweets"
+        android:adjustViewBounds="true"
+        android:backgroundTint="#ffffff"
+        android:tint="#ff1da1f2"
+        app:srcCompat="@drawable/ic_vector_heart_stroke" />
+
+    <TextView
+        android:id="@+id/tvReplies"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_toEndOf="@+id/ibReply" />
+
+    <TextView
+        android:id="@+id/tvRetweets"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_toEndOf="@+id/ibRetweet"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/tvBody"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvFavorites"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_toEndOf="@+id/ibFavorite"
+        android:text="TextView" />
 </RelativeLayout>

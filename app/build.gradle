@@ -30,6 +30,9 @@ android {
         }
     }
 }
+ext {
+    supportLibVersion = '27.1.1'  // variable that can be referenced to keep support libs consistent
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
@@ -48,5 +51,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.8.0'
     implementation 'org.parceler:parceler-api:1.1.6'
     annotationProcessor 'org.parceler:parceler:1.1.6'
-
+    implementation  "com.android.support:appcompat-v7:${supportLibVersion}"
+    implementation "com.android.support:design:${supportLibVersion}"
+    implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
 }
+
+

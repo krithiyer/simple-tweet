@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -21,13 +23,25 @@ public class ComposeActivity extends AppCompatActivity {
 
     private final int RESULT_CODE  = 2;
     Button pressButton;
+    ImageButton reply;
+    EditText currReply;
     Tweet passTweet;
+    private EditText tvNewTweet;
+    private TextView tvCharCount;
+    int charCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
         pressButton = (Button) findViewById(R.id.tvTweetButton);
+        currReply = (EditText) findViewById(R.id.tvNewTweet);
+        reply = (ImageButton) findViewById(R.id.ibReply);
+        String replyUserName = getIntent().getStringExtra("tweet");
+        currReply.append("@" + replyUserName);
+
+
+
 
         pressButton.setOnClickListener(new View.OnClickListener() {
             @Override

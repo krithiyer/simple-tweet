@@ -1,11 +1,13 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,12 +54,15 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // get data according to position
-        Tweet tweet = mTweets.get(position);
+        final Tweet tweet = mTweets.get(position);
 
         // populate views based on data
         holder.tvUserName.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
         holder.tvCreatedAt.setText(getRelativeTimeAgo(tweet.createdAt));
+        //holder.tvReplies.setText(Integer.toString(tweet.replies));
+        holder.tvRetweets.setText(Integer.toString(tweet.retweets));
+        holder.tvFavorites.setText(Integer.toString(tweet.favorites));
 
         Glide.with(context).load(tweet.user.profileImageURL).into(holder.ivProfileImage);
 
@@ -69,11 +74,16 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     }
 
     // create ViewHolder class
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivProfileImage;
         public TextView tvUserName;
         public TextView tvBody;
         public TextView tvCreatedAt;
+        public ImageButton replyTweet;
+        //public TextView tvReplies;
+        public TextView tvFavorites;
+        public TextView tvRetweets;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -82,6 +92,21 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvCreatedAt = (TextView) itemView.findViewById(R.id.tvCreatedAt);
+            //tvReplies = (TextView) itemView.findViewById(R.id.tvReplies);
+            tvFavorites = (TextView) itemView.findViewById(R.id.tvFavorites);
+            tvRetweets = (TextView) itemView.findViewById(R.id.tvRetweets);
+            replyTweet = (ImageButton) itemView.findViewById(R.id.ibReply);
+
+            replyTweet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, ComposeActivity.class);
+                    Tweet tweet = mTweets.get(getAdapterPosition());
+                    i.putExtra("tweet", tweet.user.screenName);
+                    context.startActivity(i);
+                }
+            });
+
         }
     }
     public String getRelativeTimeAgo(String rawJsonDate) {

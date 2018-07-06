@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/miCompose"
-        android:icon="@drawable/ic_launcher_twitter"
+        android:icon="@drawable/vector_compose_dm_fab"
+        app:showAsAction="always"
         android:title="Compose">
     </item>
     <item
@@ -10,6 +12,6 @@
         android:title="Loading..."
         android:visible="false"
         android:orderInCategory="100"
-        android:showAsAction="always"
+        app:showAsAction="always"
         android:actionLayout="@layout/action_view_progress" />
 </menu>
